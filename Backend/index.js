@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
-import userRouter from "./routes/userRoute.js";
+import userRoutes from "./routes/userRoutes.js";
 import connectDb from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const port = process.env.PORT || 8000;
@@ -13,7 +14,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/user", userRouter);
+app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Blog API...");
+});
+
+app.use("/api/users", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
