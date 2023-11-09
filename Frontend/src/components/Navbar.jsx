@@ -1,36 +1,56 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   return (
-    <header className="bg-slate-200 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+    <div className="navbar bg-base-200">
+      <div className="flex-1 ml-32 pl-32">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-            <span className="text-amber-900">KahverengiTabela</span>
-          </h1>
+          <button className="btn btn-ghost normal-case text-xl">
+            Kahverengi Blog
+          </button>
         </Link>
-
-        <ul className="flex items-center gap-4">
-          <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
-              Home
-            </li>
-          </Link>
-          <Link to="/about">
-            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
-              About
-            </li>
-          </Link>
-
-          <Link to="/sign-in">
-            <li className="text-slate-700 hover:underline sm:cursor-pointer">
-              {""}
-              Sign in
-            </li>
-          </Link>
-        </ul>
       </div>
-    </header>
+
+      {userInfo ? (
+        <div className="dropdown dropdown-end mr-36 pr-36">
+          <label tabIndex={0} className="btn btn-ghost normal-case text-xl m-1">
+            {userInfo.name}
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a>Profile</a>
+            </li>
+            <li>
+              <a>Log Out</a>
+            </li>
+          </ul>
+        </div>
+      ) : (
+        <div className="mr-36 pr-36">
+          <div className="">
+            <Link to="/about">
+              <button className="btn btn-ghost normal-case text-xl">
+                About
+              </button>
+            </Link>
+          </div>
+
+          <div className="">
+            <Link to="/sign-in">
+              <button className="btn btn-ghost normal-case text-xl">
+                Sign In
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
