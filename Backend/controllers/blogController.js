@@ -13,7 +13,7 @@ const create = asyncHandler(async (req, res) => {
     })
   );
 
-  const blogInputs = {name:blogData.name, description:blogData.description, contents:createdContents, address:address};
+  const blogInputs = {name:blogData.name, author:blogData.author, description:blogData.description, contents:createdContents, address:address};
   console.log(blogInputs);
   const blog = await Blog.create(blogInputs);
   return res.status(201).json(blog);
