@@ -3,7 +3,7 @@ import Blog from "../models/blogModel.js"
 import Content from "../models/contentModel.js";
 
 const create = asyncHandler(async (req, res) => {
-  const { address, contents, ...blogData } = req.body;
+  const { address, contents, name, author, description } = req.body;
 
   const createdContents = await Promise.all(
     contents.map(async (content,index) => {
@@ -13,8 +13,7 @@ const create = asyncHandler(async (req, res) => {
     })
   );
 
-  const blogInputs = {name:blogData.name, author:blogData.author, description:blogData.description, contents:createdContents, address:address};
-  console.log(blogInputs);
+  const blogInputs = {name:name, author:author, description:description, contents:createdContents, address:address};
   const blog = await Blog.create(blogInputs);
   return res.status(201).json(blog);
 
