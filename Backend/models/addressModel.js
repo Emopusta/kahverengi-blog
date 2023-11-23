@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const addressSchema = new mongoose.Schema(
   {
-    Country: {
+    country: {
       type: String,
       required: true,
     },
-    City: {
+    city: {
       type: String,
       required: true,
     },
-    County: {
+    county: {
       type: String,
       required: true,
     },
