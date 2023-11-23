@@ -27,10 +27,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
-app.use("/api/contents", blogRoutes);
+app.use("/api/contents", contentRoutes);
 app.use("/api/addresses", addressRoutes);
 app.use("/api/blogs", blogRoutes);
-
 
 app.use(notFound);
 app.use(errorHandler);
